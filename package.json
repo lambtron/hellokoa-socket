@@ -1,13 +1,13 @@
 {
   "name": "hellokoa-socket",
   "version": "1.0.0",
-  "description": "",
+  "description": "Super simple koa app with web socket support",
   "main": "index.js",
   "scripts": {
     "start": "./bin/start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "mattstyles @personalurban",
   "license": "WTFPL",
   "dependencies": {
     "co-body": "0.0.2",
