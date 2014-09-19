@@ -20,26 +20,18 @@
             color: #33333d;
         }
 
-        p {
-            margin: 0;
-            font-size: 19px;
-            color: #444;
-        }
-
         .heart {
-            display: inline-block;
+            position: fixed;
+            top: 5px;
+            right: 5px;
             transform: scale3d( .8, .8, 1 );
-            color: #96281B;
+            color: #aaaaaa;
             font-size: 21px;
         }
 
-        .heart:hover {
+        .enable {
             animation: heartbeat .6667s infinite;
             -webkit-animation: heartbeat .6667s infinite;
-        }
-
-        .koa {
-            color: #674172;
         }
 
         @keyframes heartbeat {
@@ -65,12 +57,22 @@
     </style>
 </head>
 <body>
+    <div class="heart">❤</div>
     <h1>Hello</h1>
-    <p>With <span class="heart">❤</span> from <span class="koa">Koa</span></p>
+
 
     <script src="./vendor/socket.io-client/socket.io.js"></script>
     <script charset="utf-8">
         var socket = io();
+
+        socket.on( 'connected', function( packet ) {
+            console.log( 'i am connected' );
+        });
+
+        socket.on( 'disconnected', function( packet ) {
+            console.log( 'i am disconnected from the server' );
+            console.log( 'Termination code:', packet.status );
+        });
     </script>
 </body>
 </html>
