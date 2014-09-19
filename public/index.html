@@ -30,8 +30,10 @@
         }
 
         .enable {
-            animation: heartbeat .6667s infinite;
-            -webkit-animation: heartbeat .6667s infinite;
+            color: #d91e18;
+            transform: scale3d( 1, 1, 1 );
+            animation: heartbeat 1.5s infinite;
+            -webkit-animation: heartbeat 1.5s infinite;
         }
 
         @keyframes heartbeat {
@@ -39,7 +41,15 @@
                 transform: scale3d( .8, .8, 1 );
                 color: #96281b;
             }
-            100% {
+            10% {
+                transform: scale3d( 1, 1, 1 );
+                color: #d91e18;
+            }
+            15%   {
+                transform: scale3d( .8, .8, 1 );
+                color: #96281b;
+            }
+            25% {
                 transform: scale3d( 1, 1, 1 );
                 color: #d91e18;
             }
@@ -49,7 +59,15 @@
                 -webkit-transform: scale3d( .8, .8, 1 );
                 color: #96281b;
             }
-            100% {
+            10% {
+                -webkit-transform: scale3d( 1, 1, 1 );
+                color: #d91e18;
+            }
+            15%   {
+                -webkit-transform: scale3d( .8, .8, 1 );
+                color: #96281b;
+            }
+            25% {
                 -webkit-transform: scale3d( 1, 1, 1 );
                 color: #d91e18;
             }
@@ -64,14 +82,17 @@
     <script src="./vendor/socket.io-client/socket.io.js"></script>
     <script charset="utf-8">
         var socket = io();
+        var heart = document.querySelector( '.heart' );
 
         socket.on( 'connected', function( packet ) {
             console.log( 'i am connected' );
+            heart.classList.add( 'enable' );
         });
 
         socket.on( 'disconnected', function( packet ) {
             console.log( 'i am disconnected from the server' );
             console.log( 'Termination code:', packet.status );
+            heart.classList.remove( 'enable' );
         });
     </script>
 </body>
