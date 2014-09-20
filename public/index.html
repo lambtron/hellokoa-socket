@@ -6,7 +6,7 @@
     <style media="screen">
         body {
             margin: 0;
-            padding: 60px;
+            padding: 60px 60px 100px 60px;
             font-family: 'Helvetica Neue', 'Helvetica', 'Lucida Grande', Tahoma, 'Droid Sans', sans-serif;
             font-size: 15px;
             color: #282828;
@@ -146,8 +146,8 @@
     </ul>
     <footer>
         <div class="container">
-            <input id="input" type="text" name="some_name" value="Speak...">
-            <button name="button" onClick="onMessage()">Send</button>
+            <input id="input" type="text" name="message" placeholder="Speak..." onKeydown="onKeydown( event )">
+            <button name="button" onClick="onMessage( event )">Send</button>
         </div>
     </footer>
 
@@ -179,13 +179,22 @@
             socket.emit( 'message', {
                 body: input.value
             });
-        };
+        }
+
+        function onKeydown( event ) {
+            if ( event.keyCode === 13 ) {
+                socket.emit( 'message', {
+                    body: input.value
+                });
+            }
+        }
 
         function newMessage( text ) {
             var el = document.createElement( 'li' );
             el.innerHTML = text;
 
             messages.appendChild( el );
+            input.value = '';
         }
     </script>
 </body>
