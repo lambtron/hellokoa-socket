@@ -72,28 +72,80 @@
                 color: #d91e18;
             }
         }
+
+        ul {
+            list-style-type: none;
+            margin-left: 0px;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding: 8px 14px;
+            margin: 6px 0px;
+            background: #DCC6E0;
+            color: #663399;
+            border-radius: 4px;
+            border: 1px solid #BE90D4;
+        }
+
+        footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            padding: 20px 60px;
+            background: #efefef;
+            border-top: 1px solid #ccc;
+        }
     </style>
 </head>
 <body>
     <div class="heart">❤</div>
     <h1>Hello</h1>
+    <ul id="messages">
+
+    </ul>
+    <footer>
+        <input id="input" type="text" name="some_name" value="Speak...">
+        <button name="button" onClick="onMessage()">Send</button>
+    </footer>
 
 
     <script src="./vendor/socket.io-client/socket.io.js"></script>
     <script charset="utf-8">
         var socket = io();
         var heart = document.querySelector( '.heart' );
+        var messages = document.querySelector( '#messages' );
+        var input = document.querySelector( '#input' );
 
         socket.on( 'connected', function( packet ) {
-            console.log( 'i am connected' );
+            console.log( 'I am connected' );
             heart.classList.add( 'enable' );
         });
 
         socket.on( 'disconnected', function( packet ) {
-            console.log( 'i am disconnected from the server' );
+            console.log( 'I am disconnected from the server' );
             console.log( 'Termination code:', packet.status );
             heart.classList.remove( 'enable' );
         });
+
+        socket.on( 'message', function( msg ) {
+            console.log( 'I received a message', msg );
+            newMessage( msg.body );
+        });
+
+        function onMessage( event ) {
+            socket.emit( 'message', {
+                body: input.value
+            });
+        };
+
+        function newMessage( text ) {
+            var el = document.createElement( 'li' );
+            el.innerHTML = text;
+
+            messages.appendChild( el );
+        }
     </script>
 </body>
 </html>
