@@ -190,11 +190,18 @@
         }
 
         function newMessage( text ) {
-            var el = document.createElement( 'li' );
-            el.innerHTML = text;
-
-            messages.appendChild( el );
+            new Message( text );
             input.value = '';
+        }
+
+        var Message = function( text ) {
+            this.el = document.createElement( 'li' );
+            this.el.innerHTML = text;
+            messages.appendChild( this.el );
+
+            setTimeout( function() {
+                this.el.parentElement.removeChild( this.el );
+            }.bind( this ), 5000 );
         }
     </script>
 </body>
