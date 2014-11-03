@@ -184,9 +184,7 @@
 
         function onKeydown( event ) {
             if ( event.keyCode === 13 ) {
-                socket.emit( 'message', {
-                    body: input.value
-                });
+                onMessage();
             }
         }
 
