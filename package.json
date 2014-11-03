@@ -17,7 +17,7 @@
     "koa-logger": "^1.2.1",
     "koa-route": "^1.1.4",
     "koa-static": "^1.4.5",
-    "koa-socket": "^0.0.1",
+    "koa-socket": "^0.3.0",
     "socket.io": "^1.1.0"
   }
 }
